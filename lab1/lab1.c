@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
-#define MAX 100
+#define MAX 7
 
 /* Colors
     Black   \033[0;30m
@@ -31,19 +31,18 @@ void enqueue_pr();
 void dequeue_pr();
 void display_pr();
 int peek();
-int isEmpty();
 int isFull();
 int circular_queue();
 void cq_insert();
 void cq_delete();
 void cq_display();
 
-int queue_array[MAX];
+int queue_array[];
 int rear = - 1;
 int front = - 1;
 int idx = -1;
-int pqVal[MAX];
-int pqPriority[MAX];
+int pqVal[];
+int pqPriority[];
 int rr = - 1;
 int fr = - 1;
 int queue_array_c[MAX];
@@ -157,7 +156,7 @@ void save_file() {
     if(front == - 1){red();
         printf("Queue is empty. Try adding elements first. \n");}
     else{
-        for (i = front; i != rear; i = (i + 1) % MAX)
+        for (i = front; i <= rear; i ++)
             fprintf(output, "%d ", queue_array[i]);
         fprintf(output, "%d ", queue_array[i]);
     }
@@ -169,9 +168,6 @@ void save_file() {
 
 void insert(){
     int item;
-    if(rear == MAX - 1){red();
-        printf("Queue is full. \n");}
-    else{
         if(front== - 1)
             front = 0;
             green();
@@ -180,7 +176,6 @@ void insert(){
             rear = rear + 1;
             queue_array[rear] = item;
     }
-}
 
 void delete(){
     if(front == - 1 || front > rear){red();
@@ -288,8 +283,8 @@ int priority_queue(){
 // Insert the element in maintaining items in sorted order of their priority
 void enqueue_pr()
 {
-    if(!isFull()){
         int data, priority;
+        int t_data, t_priority;
         green();
         printf("Insert the element in priority queue (nr and priority separated by space): ");
         scanf("%d %d", &data, &priority);
@@ -303,34 +298,33 @@ void enqueue_pr()
         else{
              // Increase the index
             idx++;
+            pqVal[idx] = data;
+            pqPriority[idx] = priority;            
             // in reverse order
-            for(int i = idx-1; i >= 0;i--){
-                // shift all items rightwards with higher priority
-                // than the element we trying to insert
-                if(pqPriority[i] >= priority){
-                    pqVal[i+1] = pqVal[i];
-                    pqPriority[i+1] = pqPriority[i];
-                }
-                else{
-                    // insert item just before where
-                    // lower priority index was found
-                    pqVal[i+1] = data;
-                    pqPriority[i+1] = priority;
-                    break;
+            for(int i = 0; i <= idx;i++){
+                for(int j = 0; j <= idx;j++){
+                    if(pqPriority[j] >= pqPriority[i]){
+                        t_data = pqVal[i];
+                        t_priority = pqPriority[i];
+                        pqVal[i]= pqVal[j];
+                        pqPriority[i]=pqPriority[j];
+                        pqVal[j] = t_data;
+                        pqPriority[j] = t_priority;
+                    }
                 }
                 
             }
         }
 
     }
-}
 
 void dequeue_pr()
 {
+        peek();
         idx--;
         green();
-        printf("The deleted element :");
-        peek();
+        printf(" is the deleted element\n");
+        
 }
 void display_pr(){
     if (idx == -1)
@@ -343,17 +337,10 @@ void display_pr(){
 int peek()
 {
     green();
-    printf("(%d, %d)\n",pqVal[idx], pqPriority[idx]);
+    printf("(%d, %d)",pqVal[idx], pqPriority[idx]);
     return idx;
 }
 
-int isEmpty(){
-    return idx == -1;
-}
-
-int isFull(){
-    return idx == MAX - 1;
-}
 
 // circular queue menu
 int circular_queue(){
