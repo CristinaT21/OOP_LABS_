@@ -41,7 +41,7 @@ int queue_array[];
 int rear = - 1;
 int front = - 1;
 int idx = -1;
-int pqVal[];
+char pqVal[];
 int pqPriority[];
 int rr = - 1;
 int fr = - 1;
@@ -283,17 +283,18 @@ int priority_queue(){
 // Insert the element in maintaining items in sorted order of their priority
 void enqueue_pr()
 {
-        int data, priority;
-        int t_data, t_priority;
+        int priority;
+        char data;
+        int t_priority;
+        char t_data;
         green();
         printf("Insert the element in priority queue (nr and priority separated by space): ");
-        scanf("%d %d", &data, &priority);
+        scanf("\n%c %d", &data, &priority);
         // first item being entered
         if(idx == -1){
             idx++; // increase the index
             pqVal[idx] = data;
             pqPriority[idx] = priority;
-            return;
         }
         else{
              // Increase the index
@@ -302,7 +303,7 @@ void enqueue_pr()
             pqPriority[idx] = priority;            
             // in reverse order
             for(int i = 0; i <= idx;i++){
-                for(int j = 0; j <= idx;j++){
+                for(int j = i+1; j <= idx;j++){
                     if(pqPriority[j] >= pqPriority[i]){
                         t_data = pqVal[i];
                         t_priority = pqPriority[i];
@@ -330,14 +331,14 @@ void display_pr(){
     if (idx == -1)
         {printf("Queue is empty.");}
     for (int i = 0; i <= idx; i++) {
-        printf("(%d, %d)\n",pqVal[i], pqPriority[i]);
+        printf("(%c, %d)\n",pqVal[i], pqPriority[i]);
     } 
 }
 
 int peek()
 {
     green();
-    printf("(%d, %d)",pqVal[idx], pqPriority[idx]);
+    printf("(%c, %d)",pqVal[idx], pqPriority[idx]);
     return idx;
 }
 
