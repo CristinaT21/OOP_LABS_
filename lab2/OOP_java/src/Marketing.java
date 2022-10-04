@@ -1,6 +1,10 @@
-public class HR {
-    String name;
-    String surname;
+public class Marketing {
+     String name;
+     String surname;
+
+    public void promotes() {
+        System.out.println(name + " " + surname + " promotes the company on social sites, radio and television.");
+    }
 
     public String getName() {
         return name;
@@ -17,9 +21,4 @@ public class HR {
     public void setSurname(String surname) {
         this.surname = surname;
     }
-
-    public void evaluateSkills(){
-        System.out.println(name+ " "+ surname + " is now evaluating skills.\n");
-    }
-
 }

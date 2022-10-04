@@ -34,7 +34,7 @@ And from the `Decision` class, I created the child classes: `ITDepartment` and `
 ![Screenshot from 2022-10-02 19-13-06](https://user-images.githubusercontent.com/93125408/193464510-66d6da18-0176-4389-86b7-705266b3432b.png)
 
 ## The diagram of the classes
-![Inheritance](https://user-images.githubusercontent.com/93125408/193465618-0fccd2e9-029a-4cd6-855b-95752a30dbfc.png)
+![Inheritance(1)](https://user-images.githubusercontent.com/93125408/193826843-a9521d4f-a89b-4bd4-b7ae-6d2ca2744e0c.png)
 
 ## README file
 ![Screenshot from 2022-10-02 19-15-28](https://user-images.githubusercontent.com/93125408/193464625-f93f9fe7-1220-4a97-b43e-172dcfba81c4.png)

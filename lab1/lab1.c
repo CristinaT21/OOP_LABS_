@@ -52,11 +52,11 @@ int main(){
     int choice;
     printf("\n");
     purple();
-    printf("Hi, sweetie \n");
+    printf("Hi, Alex \n");
     printf("Let's play with queues! \n");
     while (1){
         blue();printf("\n");
-        printf("-------------MAIN MENU----------------\n");
+        printf("            MAIN MENU                   \n");
         printf("--------------------------------------\n");
         printf("1. Insert element to queue (queue) \n");
         printf("2. Delete element from queue (dequeue) \n");
@@ -254,7 +254,7 @@ int priority_queue(){
     while (1){
         blue();
         printf("\n");
-        printf("---------PRIORITY QUEUE MENU-------------------\n");
+        printf("            PRIORITY QUEUE MENU                 \n");
         printf("-----------------------------------------------\n");
         printf("1. Insert element to priority queue (queue) \n");
         printf("2. Delete element from priority queue (dequeue) \n");
@@ -350,7 +350,7 @@ int circular_queue(){
     while (1){
         printf("\n");
         blue();
-        printf("------------CIRCULAR QUEUE MENU-----------------\n");
+        printf("            CIRCULAR QUEUE MENU             \n");
         printf("------------------------------------------------\n");
         printf("1. Insert element to circular queue (queue) \n");
         printf("2. Delete element from circular queue (dequeue) \n");

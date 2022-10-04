@@ -3,12 +3,13 @@ import java.util.Collections;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NoSuchMethodException {
 
         // create hr object
         HR hr = new HR();
         // hr attributes
         hr.setName("Tina");
+        hr.setSurname("Hall");
 
         // creating driver objects
         Driver driver1 = new Driver();
@@ -67,7 +68,7 @@ public class Main {
         skillArray.add(driver3.skill_nr(false));
         int max_value = Collections.max(skillArray);
         int max_index = skillArray.indexOf(max_value);
-        System.out.printf(nameArray.get(max_index) +" is the most skilled with "+ max_value + " points.\n");
+        System.out.println(nameArray.get(max_index) + " is the most skilled with " + max_value + " points.\n");
 
 
         // create passenger objects
@@ -90,12 +91,12 @@ public class Main {
         CallCenter operator2 = new CallCenter();
         // operator attributes
         operator1.setName("Emma");
+        operator1.setSurname("Real");
         operator2.setName("George");
+        operator2.setSurname("Green");
         // operator method
-        operator1.respondsToCalls(passenger1.toString(),
-                passenger1.getPhone_number());
-        operator2.respondsToCalls(passenger2.toString(),
-                passenger2.getPhone_number());
+        operator1.respondsToCalls(passenger1.toString(), passenger1.getPhone_number());
+        operator2.respondsToCalls(passenger2.toString(), passenger2.getPhone_number());
 
         // create object director
         Director director = new Director();
@@ -135,8 +136,46 @@ public class Main {
 
         driver1.isDriving(String.valueOf(car1), car1.getModel_name(), car1.getType(), car1.getPrice());
         driver2.isDriving(String.valueOf(car2), car2.getModel_name(), car2.getType(), car2.getPrice());
-        driver3.isDriving(String.valueOf(car3), car3.getModel_name(), car3.getType(), car3.getPrice());    }
+        driver3.isDriving(String.valueOf(car3), car3.getModel_name(), car3.getType(), car3.getPrice());
 
+        // mechanic
+        Mechanic mechanic1 = new Mechanic();
+        mechanic1.setName("Drake");
+        mechanic1.setSurname("True");
+        mechanic1.setAge(35);
+        mechanic1.setPhone_number("069553245");
+        mechanic1.repairs(car1.toString(), car1.getModel_name(), car1.getType());
 
+        // it
+        ITDepartment it1 = new ITDepartment();
+        it1.setName("Theodor");
+        it1.setSurname("Holland");
+        it1.setRole("App");
+        it1.creates();
 
+        ITDepartment it2 = new ITDepartment();
+        it2.setName("Josh");
+        it2.setSurname("Fast");
+        it2.setRole("Website");
+        it2.creates();
+
+        // business
+        Business business1 = new Business();
+        business1.setName("Stela");
+        business1.setSurname("Parker");
+        business1.setRole("Salary");
+        business1.manages();
+
+        Business business2 = new Business();
+        business2.setName("Eva");
+        business2.setSurname("Moon");
+        business2.setRole("Price");
+        business2.manages();
+
+        // marketing
+        Marketing marketing = new Marketing();
+        marketing.setName("Bill");
+        marketing.setSurname("Grande");
+        marketing.promotes();
+    }
 }

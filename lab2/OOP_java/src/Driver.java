@@ -1,3 +1,6 @@
+import java.lang.reflect.Method;
+import java.util.Random;
+
 public class Driver {
      String name;
      String surname;
@@ -7,6 +10,7 @@ public class Driver {
      boolean know_ru_lang;
      boolean know_en_lang;
      int work_exp; // working experience in taxi industry
+     private String task;
 
      public void setName(String name){
           this.name = name;
@@ -71,6 +75,19 @@ public class Driver {
      public int getWork_exp() {
           return work_exp;
      }
+
+//     //String[] tasks = {"drives()", "arrivesToDestination()", "isOnBreak()"};
+//     public void randomTask(String driver) throws NoSuchMethodException {
+//          String[] tasks = {"drives()", "arrivesToDestination()", "isOnBreak()"};
+//          Random random = new Random();
+//          int randomInt = random.nextInt(tasks.length);
+//          task = tasks[randomInt];
+//          Method method = driver.getClass().getMethod(task);
+//          //String t = (String) method.invoke(driver);
+//          System.out.println(method);
+//         // return tasks[randomInt];
+//         // return driver.task;
+//     }
 
      public void isDriving(String car, String model_name, String type, String price){
           System.out.println(getName()+ " " + getSurname() + " drives a " + model_name + ", " + type + ", " +  price + ".\n");
