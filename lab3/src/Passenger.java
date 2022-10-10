@@ -1,4 +1,4 @@
-public class Passenger extends Person{
+public class                                                                     Passenger extends Person{
     private String phone_number;
     public Passenger(String name, String surname,String phone_number) {
         super(name, surname);
