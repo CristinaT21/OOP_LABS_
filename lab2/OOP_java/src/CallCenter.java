@@ -22,4 +22,3 @@ public class CallCenter {
         System.out.println(name +" " + surname + " responds to " + phone_number + " and assigns a car to the customer.\n ");
     }
 }
-
