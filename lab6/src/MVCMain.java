@@ -1,19 +1,16 @@
-import java.nio.charset.Charset;
-import java.util.*;
-import java.lang.Math;
+import Controller.Controller;
+import Model.*;
+import View.View;
 
-public class Main {
+import java.util.*;
+
+import static View.View.*;
+
+public class MVCMain {
     public static void main(String[] args) {
         boolean works = true;
 
-        System.out.println("Welcome to " + TaxiCompany.CompanyName + "!");
-        Director director = new Director("Richard", "Thomson");
-        Director vicedirector = new Director("Blake", "Carrington");
-        director.runsTheBusiness();
-        Scanner money = new Scanner(System.in);
-        Float  moneyType;
-        System.out.println("Choose the amount of money as a start for the company: ");
-        moneyType = Float.valueOf(money.nextLine());
+        simulationStart();
 
         Random generate = new Random();
         String[] names = {"John", "Marcus", "Susan", "Henry", "Olivia", "Noah", "Emma", "Liam", "Amelia"
@@ -72,21 +69,23 @@ public class Main {
                 , "313 371-9670", "856 419-0566", "848 972-3523", "867 742-1291", "253 497-5662"
                 , "507 434-9639", "626 479-8461", "403 000-9729", "647 693-0223", "865 274-6716"};
 
+        // create directors
+        Director director = new Director("Richard", "Thomson");
+        Director vicedirector = new Director("Blake", "Carrington");
+        // create financial analysts
         FinancialAnalyst business1 = new FinancialAnalyst("Stela","Parker","Salary");
         FinancialAnalyst business2 = new FinancialAnalyst("Eva","Moon","Price");
-        List <FinancialAnalyst> FinancialAnalystArray = new ArrayList<>();
-        FinancialAnalystArray.add(business1);
-        FinancialAnalystArray.add(business2);
         // create hr object
         Rectruiter hr = new Rectruiter("Tina", "Hall");
         //int driver_nr;
         Scanner driver_nr = new Scanner(System.in);
         int  driver_type;
         System.out.println("Choose number of drivers: ");
-        driver_type = Integer.valueOf(driver_nr.nextLine());
         // create driver objects
+        driver_type = Integer.valueOf(driver_nr.nextLine());
         Driver[] driver;
         driver = new Driver[driver_type];
+        // driver array
         List<Driver> DriverArray = new ArrayList<>();
         for (int i = 0; i < driver_type; i++) {
             driver[i] = new Driver(String.valueOf(names[generate.nextInt(100)]),
@@ -95,11 +94,64 @@ public class Main {
                     generate.nextBoolean(), getRandomNumberInRange(0, 30));
             DriverArray.add(driver[i]);
         }
+        // create car objects
+        Car[] car;
+        car = new Car[DriverArray.size()];
+        // car array
+        List<Car> CarArray = new ArrayList<>();
+        // create passenger
+        Scanner passenger_nr = new Scanner(System.in);
+        int  passenger_type;
+        System.out.println("Choose number of clients: ");
+        passenger_type = Integer.valueOf(passenger_nr.nextLine());
+        Passenger[] passenger;
+        passenger = new Passenger[passenger_type];
+        List<Passenger> PassengerArray = new ArrayList<>();
+        // create developers
+        Developer it1 = new Developer("Theodor", "Holland", "App");
+        Developer it2 = new Developer("Josh", "Fast", "Website");
+        // create marketing
+        ServicePromoter marketing1 = new ServicePromoter("Bill", "Grande");
+        ServicePromoter marketing2 = new ServicePromoter("Teo", "Rose");
+        ServicePromoter marketing3 = new ServicePromoter("Andrew", "Redd");
+        // create operators
+        Operator operator1 = new Operator("Emma","Real");
+        Operator operator2 = new Operator("George","Green");
+        Operator operator3 = new Operator("Ron", "Tedd");
+        // operator array
+        List <Operator> OperatorArray = new ArrayList<>();
+        // create mechanics
+        Mechanic mechanic1 = new Mechanic("Drake","True",
+                35,"069553245");
+        Mechanic mechanic2 = new Mechanic("Pietro","Spaghetti",
+                31,"068167496");
+        // mechanic array
+        List <Mechanic> MechanicArray = new ArrayList<>();
+        View view = new View();
+        // Controller
+        Controller controller = new Controller(car, director, vicedirector, business1, business2
+                , hr, driver, passenger, it1, it2, marketing1,marketing2,marketing3,operator1,
+                operator2,operator3,mechanic1,mechanic2, view);
+
+        director.runsTheBusiness();
+
+
+
+
+        Scanner money = new Scanner(System.in);
+        Float  moneyType;
+        System.out.println("Choose the amount of money as a start for the company: ");
+        moneyType = Float.valueOf(money.nextLine());
+
+
+         List<FinancialAnalyst> FinancialAnalystArray = new ArrayList<>();
+        FinancialAnalystArray.add(business1);
+        FinancialAnalystArray.add(business2);
+        // create hr object
 
         List<String> i_list = new ArrayList<>();
         int j = 0;
-        System.out.println(hr.getName() + " is evaluating the skills of all potential employees.");
-        //hr.evaluateSkills(String.valueOf(DriverArray.get(i)), DriverArray.get(i).getName(), DriverArray.get(i).getSurname());
+        hrEvaluatesSkills(controller.getHrName());
         for (int i = 0; i < driver_type; i++) {
             DriverArray.get(j).skill_nr(true);
             if (Objects.equals(DriverArray.get(j).skill_nr(false), 2)) {
@@ -110,14 +162,11 @@ public class Main {
             System.out.println(DriverArray.size());
             j+=1;
         }
-        System.out.println("The incompetent drivers for the job are: " + i_list);
-        System.out.println("The number of drivers hired is " + DriverArray.size());
+        incompetentDrivers(i_list);
+        hiredDrivers(DriverArray);
 
         FinancialAnalystArray.get(0).supports();
-        // create car objects
-        Car[] car;
-        car = new Car[DriverArray.size()];
-        List<Car> CarArray = new ArrayList<>();
+
         for (int i = 0; i < DriverArray.size(); i++) {
             car[i] = new Car(String.valueOf(models[generate.nextInt(models.length)]),
                     String.valueOf(types[generate.nextInt(types.length)]),
@@ -125,13 +174,7 @@ public class Main {
             CarArray.add(car[i]);
         }
 
-        Scanner passenger_nr = new Scanner(System.in);
-        int  passenger_type;
-        System.out.println("Choose number of clients: ");
-        passenger_type = Integer.valueOf(passenger_nr.nextLine());
-        Passenger[] passenger;
-        passenger = new Passenger[passenger_type];
-        List<Passenger> PassengerArray = new ArrayList<>();
+
         for (int i = 0; i < passenger_type; i++) {
             passenger[i] = new Passenger(String.valueOf(names[generate.nextInt(100)]),
                     String.valueOf(surnames[generate.nextInt(100)]),
@@ -147,26 +190,11 @@ public class Main {
                     String.valueOf(prices[generate.nextInt(prices.length)]));
         }
         // developer scenarios
-        // it objects with attributes and methods
-        Developer it1 = new Developer("Theodor", "Holland", "App");
-        Developer it2 = new Developer("Josh", "Fast", "Website");
 
-        ServicePromoter marketing1 = new ServicePromoter("Bill", "Grande");
-        ServicePromoter marketing2 = new ServicePromoter("Teo", "Rose");
-        ServicePromoter marketing3 = new ServicePromoter("Andrew", "Redd");
-
-        Operator operator1 = new Operator("Emma","Real");
-        Operator operator2 = new Operator("George","Green");
-        Operator operator3 = new Operator("Ron", "Tedd");
-        List <Operator> OperatorArray = new ArrayList<>();
         OperatorArray.add(operator1);
         OperatorArray.add(operator2);
         OperatorArray.add(operator3);
-        Mechanic mechanic1 = new Mechanic("Drake","True",
-                35,"069553245");
-        Mechanic mechanic2 = new Mechanic("Pietro","Spaghetti",
-                31,"068167496");
-        List <Mechanic> MechanicArray = new ArrayList<>();
+
         MechanicArray.add(mechanic1);
         MechanicArray.add(mechanic2);
         int clients;
@@ -175,7 +203,7 @@ public class Main {
         List<Driver> OccupiedDrivers = new ArrayList<>();
         boolean moneyCars = true;
         if(moneyType<15000*DriverArray.size()){
-            System.out.println("Company has no money to start the business. Cars are expensive");
+            noMoney();
             works=false;
         }
         int dir_die = getRandomNumberInRange(40*365, 60*365);
@@ -199,64 +227,60 @@ public class Main {
             float MoneyDay = 0, MoneyFuel = 0;
 
             for(int i=0; i<24; i++){
-                 int unhappyClients = 0;
-                 int NoClients = getsNoClients(i);
-                 if(PassengerArray.size()==0){
-                    System.out.println("The company is closed because of lack of clients.");
+                int unhappyClients = 0;
+                int NoClients = getsNoClients(i);
+                if(PassengerArray.size()==0){
+                    noClients();
                     break;
                 }
                 if (NoClients>PassengerArray.size()){
                     break;
                 }
-                 for (j = 0; j<=NoClients; j++){
+                for (j = 0; j<=NoClients; j++){
 
-                     OccupiedDrivers.add(DriverArray.get(0));
-                     DriverArray.remove(0);
+                    OccupiedDrivers.add(DriverArray.get(0));
+                    DriverArray.remove(0);
+                    assignCar(controller.getRandomOperatorName(OperatorArray),
+                            controller.getRandomPassengerPhoneNumber(PassengerArray),
+                            controller.getRandomCarModelName(CarArray),
+                            controller.getRandomCarType(CarArray),
+                            controller.getRandomCarPrice(CarArray));
+                }
 
-                     System.out.printf("%s responds to %s and assigns the car %s %s %s.%n",
-                             OperatorArray.get(getRandomNumberInRange(0, OperatorArray.size()-1)).getName(),
-                             PassengerArray.get(getRandomNumberInRange(0, PassengerArray.size()-1)).getPhone_number(),
-                             CarArray.get(getRandomNumberInRange(0, CarArray.size()-1)).getModel_name(),
-                             CarArray.get(getRandomNumberInRange(0, CarArray.size()-1)).getType(),
-                             CarArray.get(getRandomNumberInRange(0, CarArray.size()-1)).getPrice());
-                 }
+                unhappyClients = (int) (unhappyClients + Math.floor(NoClients*cl_coef));
+                for (int m=0; m<unhappyClients; m++ ){
+                    System.out.println(PassengerArray.get(0));
+                    PassengerArray.get(0).calls(CarArray.get(getRandomNumberInRange(0, CarArray.size()-1)).toString(),
+                            controller.getRandomCarType(CarArray),
+                            controller.getRandomCarPrice(CarArray));
+                    OperatorArray.get(0).calls(PassengerArray.get(getRandomNumberInRange(0, PassengerArray.size()-1)).toString(),
+                            controller.getRandomPassengerPhoneNumber(PassengerArray),
+                            false);
+                    PassengerArray.remove(0);
+                    driverInTraffic(controller.getRandomDriverName(DriverArray));
+                    PassengerArray.get(m).getsToDestination(false,
+                            String.valueOf(DriverArray.get(getRandomNumberInRange(0, DriverArray.size()-1))),
+                            controller.getRandomDriverName(DriverArray));
+                }
+                int happyClients = NoClients - unhappyClients;
+                for(int n = 0; n<happyClients; n++){
+                    PassengerArray.get(n).calls(CarArray.get(getRandomNumberInRange(0, CarArray.size()-1)).toString(),
+                            CarArray.get(getRandomNumberInRange(0, CarArray.size()-1)).getType(), CarArray.get(0).getPrice());
+                    OperatorArray.get(getRandomNumberInRange(0,2)).calls(PassengerArray.get(getRandomNumberInRange(0, PassengerArray.size()-1)).toString(),
+                            controller.getRandomPassengerPhoneNumber(PassengerArray), true);
+                    driverOnWay(controller.getRandomDriverName(DriverArray));
+                    PassengerArray.get(n).getsToDestination(true,
+                            String.valueOf(DriverArray.get(getRandomNumberInRange(0, DriverArray.size()-1))),
+                            controller.getRandomDriverName(DriverArray));
 
-                 unhappyClients = (int) (unhappyClients + Math.floor(NoClients*cl_coef));
-                 for (int m=0; m<unhappyClients; m++ ){
-                     System.out.println(PassengerArray.get(0));
-                     PassengerArray.get(0).calls(CarArray.get(getRandomNumberInRange(0, CarArray.size()-1)).toString(),
-                             CarArray.get(getRandomNumberInRange(0, CarArray.size()-1)).getType(),
-                             CarArray.get(getRandomNumberInRange(0, CarArray.size()-1)).getPrice());
-                     OperatorArray.get(0).calls(PassengerArray.get(getRandomNumberInRange(0, PassengerArray.size()-1)).toString(),
-                             PassengerArray.get(getRandomNumberInRange(0, PassengerArray.size()-1)).getPhone_number(),
-                             false);
-                     PassengerArray.remove(0);
-                     System.out.println(DriverArray.get(getRandomNumberInRange(0, DriverArray.size()-1)).getName()
-                             + " is in traffic with another passenger.");
-                     PassengerArray.get(m).getsToDestination(false,
-                             String.valueOf(DriverArray.get(getRandomNumberInRange(0, DriverArray.size()-1))),
-                             DriverArray.get(getRandomNumberInRange(0, DriverArray.size()-1)).getName());
-                 }
-                 int happyClients = NoClients - unhappyClients;
-                 for(int n = 0; n<happyClients; n++){
-                     PassengerArray.get(n).calls(CarArray.get(getRandomNumberInRange(0, CarArray.size()-1)).toString(),
-                             CarArray.get(getRandomNumberInRange(0, CarArray.size()-1)).getType(), CarArray.get(0).getPrice());
-                     OperatorArray.get(getRandomNumberInRange(0,2)).calls(PassengerArray.get(getRandomNumberInRange(0, PassengerArray.size()-1)).toString(),
-                             PassengerArray.get(getRandomNumberInRange(0, PassengerArray.size()-1)).getPhone_number(), true);
-                     System.out.println(DriverArray.get(getRandomNumberInRange(0, DriverArray.size()-1)).getName()
-                             + " is on his way to the customer.");
-                     PassengerArray.get(n).getsToDestination(true,
-                             String.valueOf(DriverArray.get(getRandomNumberInRange(0, DriverArray.size()-1))),
-                             DriverArray.get(getRandomNumberInRange(0, DriverArray.size()-1)).getName());
-
-                 }
-                 MoneyDay = MoneyDay + NoClients*initialPrice*getsCoef(i);
-                 MoneyFuel = MoneyFuel + NoClients*fuelPrice;
+                }
+                MoneyDay = MoneyDay + NoClients*initialPrice*getsCoef(i);
+                MoneyFuel = MoneyFuel + NoClients*fuelPrice;
                 for (int k = 0; k<=NoClients; k++){
                     DriverArray.add(OccupiedDrivers.get(0));
                     OccupiedDrivers.remove(0);
                 }
-                System.out.println("Day "+ day +", hour " + String.valueOf(i));
+                showHour(day, i);
 
                 clients = PassengerArray.size();
                 if (clients < 30 && moneyType > 10000) {
@@ -292,18 +316,18 @@ public class Main {
                     moneyType = moneyType - 500;
                 }
                 if (clients <= NoClients) {
-                    System.out.println("The company is bankrupt because of lack of clients.");
+                    NoClients();
                     works = false;
                     break;
                 }
                 if (moneyType < 0) {
-                    System.out.println("The company is bankrupt because of lack of money.");
+                    NoMoney();
                     works = false;
                     break;
                 }
 
                 if (DriverArray.size() <= 0) {
-                    System.out.println("The company is bankrupt because of lack of drivers.");
+                    noDrivers();
                     works = false;
                     break;
                 }
@@ -382,85 +406,65 @@ public class Main {
             if (day % 182 == 0 && moneyType > 100000){
                 int priceCar = getRandomNumberInRange(60000, 99999);
                 moneyType -= priceCar;
-                System.out.println(mechanic1.getName() + " and "+ mechanic2.getName()+
-                        " are trying to repair the broken cars.");
+                repairCars(controller.getMechanic1Name(), controller.getMechanic2Name());
                 for(int i=0; i<3; i++){
-                    CarArray.get(getRandomNumberInRange(0, CarArray.size())).works(false);
+                    CarArray.get(getRandomNumberInRange(0, CarArray.size()-1)).works(false);
                     mechanic1.repairs(String.valueOf(CarArray.get(getRandomNumberInRange(0, CarArray.size()-1)))
                             ,String.valueOf(models[generate.nextInt(models.length)]),
                             String.valueOf(types[generate.nextInt(types.length)]));
-                    CarArray.get(getRandomNumberInRange(0, CarArray.size())).works(false);
+                    CarArray.get(getRandomNumberInRange(0, CarArray.size()-1)).works(false);
                     mechanic2.repairs(String.valueOf(CarArray.get(getRandomNumberInRange(0, CarArray.size()-1)))
-                        ,String.valueOf(models[generate.nextInt(models.length)]),
-                        String.valueOf(types[generate.nextInt(types.length)]));
+                            ,String.valueOf(models[generate.nextInt(models.length)]),
+                            String.valueOf(types[generate.nextInt(types.length)]));
                 }
-                System.out.println("The cars that couldn't be repaired have been replaced by new ones.");
-                System.out.println(getRandomNumberInRange(1, 3)+" new cars have been added to auto park.");
+                brokenCars();
+                carsAdded();
             }
 
-                System.out.println("Money profit of the day is " + (MoneyDay-MoneyFuel));
-                System.out.println("Money company has " + String.valueOf(moneyType));
+            moneyProfit(MoneyDay-MoneyFuel);
+            moneyCompany(String.valueOf(moneyType));
 
             if (day == dir_die){
-                System.out.println(director.getName() + " " + director.getSurname()+ " has died. " +
-                        "His son decided to continue the family tradition.");
+                directorDied(controller.getDirectorName(), controller.getDirectorSurname());
                 vicedirector.runsTheBusiness();
             }
             if (day >= getRandomNumberInRange(dir_die+1, 100*365)){
-                System.out.println(vicedirector.getName() + " " + vicedirector.getSurname()+ " has died. " +
-                        "The daughter decided to sell the company and move to LA.");
-
+                vicedirectorDied(controller.getVicedirectorName(), controller.getVicedirectorSurname());
                 break;
             }
 
             day++;
 
-/*
-
-
-        FinancialAnalyst business1 = new FinancialAnalyst("Stela","Parker","Salary");
-        System.out.println("1 salaries need to be set");
-        System.out.println("2 road price needs to be set");
-        System.out.println("3 salaries and road price need to be set");
-        System.out.println("4 salaries and road price are already set");
-        finType = fin.nextLine();
-        if (finType.equals("1")) {
-            FinancialAnalystArray.get(0).supports();
-        if (finType.equals("4")) {
-            System.out.println("Because the salaries and road prices are already set:");
-            FinancialAnalystArray.get(0).study();
-            FinancialAnalystArray.get(1).study();
-        }*/
         }
     }
-        public static int getsNoClients(int hour){
+    public static int getsNoClients(int hour){
         int NoClients = 0;
-            if (hour<6){
-                NoClients = getRandomNumberInRange(1,4);
-            } else if (hour>=6 && hour <=18) {
-                NoClients = getRandomNumberInRange(4, 9);
-            } else if (hour>18 && hour <24) {
-                NoClients = getRandomNumberInRange(8, 15);
-            }
-            return NoClients;
+        if (hour<6){
+            NoClients = getRandomNumberInRange(1,4);
+        } else if (hour>=6 && hour <=18) {
+            NoClients = getRandomNumberInRange(4, 9);
+        } else if (hour>18 && hour <24) {
+            NoClients = getRandomNumberInRange(8, 15);
         }
-        public static float getsCoef(int hour){
-            float Coef = 0;
-            if (hour<6){
-                Coef = 1.5F;
-            } else if (hour>=6 && hour <=18) {
-                Coef = 1;
-            } else if (hour>18 && hour <24) {
-                Coef = 1.2F;        }
-            return Coef;
-        }
-        private static int getRandomNumberInRange ( int min, int max){
+        return NoClients;
+    }
+    public static float getsCoef(int hour){
+        float Coef = 0;
+        if (hour<6){
+            Coef = 1.5F;
+        } else if (hour>=6 && hour <=18) {
+            Coef = 1;
+        } else if (hour>18 && hour <24) {
+            Coef = 1.2F;        }
+        return Coef;
+    }
+    private static int getRandomNumberInRange ( int min, int max){
 
-            if (min >= max) {
-                throw new IllegalArgumentException("max must be greater than min");
-            }
-
-            Random r = new Random();
-            return r.nextInt((max - min) + 1) + min;
+        if (min >= max) {
+            throw new IllegalArgumentException("max must be greater than min");
         }
+
+        Random r = new Random();
+        return r.nextInt((max - min) + 1) + min;
+    }
 }

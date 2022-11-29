@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ad0c5ed1-3304-4810-a32f-a124e73cd765" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/lab5.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4/out/production/lab4/Director.class" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4/out/production/lab4/Director.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab6/src/Controller/Controller.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab6/src/View/View.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/lab5/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/lab5/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,7 +29,8 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/cristina/OOP_LABS_/lab5&quot;
   }
 }</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -39,6 +43,12 @@
       <updated>1667046894976</updated>
       <workItem from="1667046896290" duration="6983000" />
       <workItem from="1667128937841" duration="13765000" />
+      <workItem from="1667816799329" duration="9749000" />
+      <workItem from="1667915819748" duration="7034000" />
+      <workItem from="1669479245770" duration="730000" />
+      <workItem from="1669639200540" duration="2559000" />
+      <workItem from="1669673223214" duration="599000" />
+      <workItem from="1669677633124" duration="932000" />
     </task>
     <servers />
   </component>
